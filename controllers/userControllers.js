@@ -7,6 +7,7 @@ const ttlFriends = async () =>
     .then((numberOfFriends) => numberOfFriends)
 
 module.exports = {
+    //Get all users in collection
     getAllUsers(req, res) {
         User.find()
         .then(async (users) =>{
@@ -21,6 +22,7 @@ module.exports = {
         })
     },
 
+    //Get one user from collection, Using id
     getOneUser(req, res) {
         User.findOne({ _id: req.params.userId })
         .select('-__v')
@@ -38,6 +40,7 @@ module.exports = {
         })
     },
 
+    //Create a new user
     createNewUser(req, res) {
         User.create(req.body) 
         .then((user) => res.json(user))
@@ -45,6 +48,7 @@ module.exports = {
         
     },
 
+    //Update user from collection, Using id and body
     updateUser(req, res) {
         User.findOneAndUpdate(
             { _id: req.params.userId },
@@ -62,6 +66,7 @@ module.exports = {
         })
     },
 
+    //Delete user from collection, Using id
     deleteUser(req, res){
         User.findOneAndRemove({ _id: req.params.userId })
         .then((user) =>
@@ -84,6 +89,7 @@ module.exports = {
         })
     },
 
+    //Add a friend using user id
     addFriend(req, res){
         User.findOneAndUpdate(
             { _id: req.params.userId },
@@ -98,6 +104,7 @@ module.exports = {
         .catch((err) => res.status(500).json(err))
     },
 
+    //delete a friend using user id
     deleteFriend(req, res) {
         User.findOneAndUpdate(
             { _id: req.params.userId },
