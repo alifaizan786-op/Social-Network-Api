@@ -39,7 +39,7 @@ const userSchema = new Schema(
 );
 
 userSchema
-.virtual('friendCount')
+.virtual('ttlFriends')
 .get(function () {
         return this.friends.length
     })
