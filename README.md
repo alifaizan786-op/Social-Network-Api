@@ -18,7 +18,17 @@ Live Link: [Social-Network-Api](https://github.com/alifaizan786-op/Social-Networ
 ## Usage
 A complete social media application backend api
 
+## Tests
 
+Demonstration of Get All Users, Get One User, Create User, Edit User, Delete User
+High-Res available in assets folder
+
+![userCRUD](assets/userCRUD.gif)
+
+Demonstration of Get All Thoughts, Get One Thought, Create Thought, Edit Thought, Delete Thought
+High-Res available in assets folder
+
+![userCRUD](assets/thoughtCRUD.gif)
 
 
 ### Resources
