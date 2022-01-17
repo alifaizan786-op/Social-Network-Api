@@ -8,14 +8,18 @@ module.exports = {
     },
 
     getOneThought(req, res) {
+        console.log(req.params)
         Thought.findOne({ _id: req.params.thoughtId })
         .select('-__v')
         .then((thought) =>
-         !thought
-            ? res.status(404).json({ message: 'No Thought Found' })
-            : res.json(thought)
+            !thought
+            ? res.status(404).json({ message: 'thought Not Found' })
+            : res.json({thought})
         )
-        .catch((err) => res.status(500).json(err));
+        .catch((err) => {
+            console.log(err)
+            return res.status(500).json(err)
+        })
     },
 
     createThought(req, res) {
@@ -41,19 +45,10 @@ module.exports = {
         })
     },
 
-    deleteThought(req, res){
-        Thought.findOneAndDelete({ thoughtId : req.params.thoughtId })
-        .then((thought) =>
-         !thought
-            ? res.status(404).json({ message: 'thought not found'})
-            : User.findByIdAndUpdate(
-                { username: thought.username },
-                { $pull: {thoughts: req.params.thoughtId}},
-                { runValidators: true, new: true }
-            )
-        )
-        .then(() => res.json({message: 'thought deleted'}))
-        .catch((err) => res.status(500).json(err));
+    deleteThought(req, res) {
+        Thought.findOneAndDelete({ thoughtId: req.params.thoughtId })
+            .then(() => res.json({ message: 'thought deleted' }))
+            .catch((err) => res.status(500).json(err));
     },
 
     updateThought(req, res) {
@@ -72,4 +67,32 @@ module.exports = {
           )
           .catch((err) => res.status(500).json(err));
       },
+
+      addReaction(req, res) {
+          Thought.findOneAndUpdate(
+              { thoughtId: req.params.thoughtId },
+              { $addToSet: {reactions: req.body}  },
+              { runValidators: true, new: true }
+          )
+          .then((thought)=>
+           !thought
+                ? res.status(404).json({ message: 'Thought Not Found' })
+                : res.json(thought)
+          )
+          .catch((err)=> res.status(500).json(err))
+      },
+
+      deleteReaction(req, res) {
+        Thought.findOneAndUpdate(
+          { thoughtId: req.params.thoughtId },
+          { $pull: {reactions: {reactionId: req.params.reactionId}} },
+          { runValidators: true, new: true }
+        )
+          .then((thought) => 
+            !thought
+              ? res.status(404).json({ message: 'Thought Not Found' })
+              : res.json(thought)
+            )
+          .catch((err) => res.status(500).json(err));
+      }, 
 }

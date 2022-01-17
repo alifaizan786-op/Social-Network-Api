@@ -8,6 +8,7 @@ Live Link: [Social-Network-Api](https://github.com/alifaizan786-op/Social-Networ
 - [Installation](#installation)
 - [License](#license)
 - [Questions](#questions)
+- [Tests](#tests)
 ---
 ## Installation
 - Clone
@@ -17,9 +18,12 @@ Live Link: [Social-Network-Api](https://github.com/alifaizan786-op/Social-Networ
 ## Usage
 A complete social media application backend api
 
+
+
+
 ### Resources
 - stackoverflow.com
--  mongoosejs.com
+- mongoosejs.com
 
 ## License
 ![MIT](https://img.shields.io/static/v1?label=license&message=MIT&color=brightgreen&style=plastic)
